@@ -3,7 +3,7 @@ Short description....
 
 ###Instalation:
 
-git clone ///
+git clone https://github.com/jankomarko/object-user-system.git
 create database
 import database tables from file database/db-create.sql
 insert config data to config/database.php
