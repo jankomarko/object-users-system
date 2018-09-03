@@ -36,6 +36,8 @@ class register
             echo "Uspesno ste re registrovali!<br>";
         } else {
             require('views/errorpage.php');
+            $err= new errorpage();
+            $err->errormessage();
         }
     }
 

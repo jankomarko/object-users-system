@@ -22,17 +22,12 @@
         </div>
     </div>
 </form>
-
-
 <?php
-
 if (isset($_POST['submit'])) {
-    require('controllers/login.php');
-  //  login($_POST['username'], $_POST['password']);
-    require "errorpage.php";
-
+    //require('controllers/login.php');
+    $log = new login();
+    $log->loginuser($_POST['username'], $_POST['password']);
 }
 ?>
-
 <h6><br> Ako nemate nalog <a href="index.php?opcija=register"> registrujte se</a></h6>
 <hr>

@@ -82,7 +82,7 @@ class DAOuser
     {
         global $pdo;
         $_SESSION['acount'] = 0;
-        $qlogin = ("SELECT * FROM `clanovi` WHERE korisnicko_ime= :username AND sifra=:password");
+        $qlogin = ("SELECT * FROM `users` WHERE username= :username AND password=:password");
         $log = $pdo->prepare($qlogin);
         $log->execute(array(
             ':username' => $username,
@@ -93,7 +93,7 @@ class DAOuser
             $ac = $log->fetchAll(PDO::FETCH_OBJ);
             foreach ($ac as $aco) {
                 echo "eeeeeeeee";
-                $_SESSION['acount'] = new User($aco->id_clana, $aco->ime, $aco->prezime, $aco->korisnicko_ime, $aco->sifra, $aco->user_type, $aco->access);
+                $_SESSION['acount'] = new User($aco->id_user, $aco->name, $aco->lastname, $aco->username, $aco->password, $aco->user_type, $aco->access);
                 $_SESSION['adm'] = $aco->user_type;
             }
 

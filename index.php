@@ -1,15 +1,15 @@
 <?php
 require "views/layout/header.php";
 require "models/connector.php";
-$con=new connector();
+require "views/meni.php";
+$meni = new meni();
+$con = new connector();
 $con->conection();
 
-require "views/meni.php";
 session_start();
 
 if (isset($_SESSION['id'])) {
-    menilogin();
-
+    $meni->menilogin();
     if (isset($_GET['opcija'])) {
         $fajl = $_GET['opcija'] . ".php";
         if (empty($_POST)) {
@@ -27,7 +27,7 @@ if (isset($_SESSION['id'])) {
     }
 
 } else {
-    menilogout();
+    $meni->menilogout();
     if (isset($_GET['opcija'])) {
         $fajl = $_GET['opcija'] . ".php";
         if (empty($_POST)) {
