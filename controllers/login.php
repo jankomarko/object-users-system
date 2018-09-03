@@ -15,7 +15,6 @@ class login
             $_SESSION['error'] .= "Morate popuniti polje pasword<br>";
         }
         if ($_SESSION['error'] == "") {
-            require "models/DAOuser.php";
             $dao= new DAOuser();
             $dao->loginUsers($username, $password);
             if ($_SESSION['acount'] !== 0) {
@@ -24,10 +23,7 @@ class login
                     header("Location:index.php");
                 } else $_SESSION['error'] .= "Pristup odbijen";
             } else $_SESSION['error'] .= "Pogresni podaci";
-
-
         }
-        require  "views/errorpage.php";
         $err= new errorpage();
         $err->errormessage();
 

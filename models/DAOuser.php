@@ -10,8 +10,6 @@ class DAOuser
 {
     function insertUsers($user)
     {
-        require "User.php";
-        // require conection();
         global $pdo;
         $insert = ("INSERT INTO `users`(`name`, `lastname`, `username`, `password`)   VALUES (:nam, :las, :use, :pas)");
         $d = $pdo->prepare($insert);
@@ -25,7 +23,6 @@ class DAOuser
 
     function deleteUsers($id)
     {
-        // require conection();
         global $pdo;
         $delete = ("DELETE FROM `users` WHERE `id_user`=:id");
         $del = $pdo->prepare($delete);
@@ -37,7 +34,6 @@ class DAOuser
 
     function selectUsers($name, $username)
     {
-        //  require conection();
         global $pdo;
         if ($name !== "" || $username !== "") {
             if ($name !== "") {
@@ -68,7 +64,6 @@ class DAOuser
                 ':username' => $username
             ));
         }
-
         if ($pri->rowCount() > 0) {
 
             $result = $pri->fetchAll(PDO::FETCH_OBJ);
@@ -76,7 +71,6 @@ class DAOuser
         }
         return $result = 0;
     }
-
 
     function loginUsers($username, $password)
     {
@@ -92,13 +86,10 @@ class DAOuser
             require "User.php";
             $ac = $log->fetchAll(PDO::FETCH_OBJ);
             foreach ($ac as $aco) {
-                echo "eeeeeeeee";
                 $_SESSION['acount'] = new User($aco->id_user, $aco->name, $aco->lastname, $aco->username, $aco->password, $aco->user_type, $aco->access);
                 $_SESSION['adm'] = $aco->user_type;
             }
-
         }
         return $_SESSION['acount'];
-
     }
 }

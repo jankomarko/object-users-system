@@ -24,7 +24,6 @@
 </form>
 <?php
 if (isset($_POST['submit'])) {
-    //require('controllers/login.php');
     $log = new login();
     $log->loginuser($_POST['username'], $_POST['password']);
 }
