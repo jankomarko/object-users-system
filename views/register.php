@@ -39,8 +39,8 @@
 
 <?php
 if(isset($_POST['submit'])){
-    require ('controllers/register.php');
-   // register($_POST['name'],$_POST['lastname'],$_POST['username'],$_POST['password'],$_POST['repassword']);
+    $reg= new register();
+    $reg->registeruser($_POST['name'],$_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['repassword']);
 }
 ?>
 

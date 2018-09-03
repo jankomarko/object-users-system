@@ -1,11 +1,15 @@
 <?php
 require "views/layout/header.php";
 require "models/connector.php";
+$con=new connector();
+$con->conection();
+
 require "views/meni.php";
 session_start();
 
 if (isset($_SESSION['id'])) {
     menilogin();
+
     if (isset($_GET['opcija'])) {
         $fajl = $_GET['opcija'] . ".php";
         if (empty($_POST)) {
