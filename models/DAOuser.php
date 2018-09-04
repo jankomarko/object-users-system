@@ -37,27 +37,27 @@ class DAOuser
         global $pdo;
         if ($name !== "" || $username !== "") {
             if ($name !== "") {
-                $search = "SELECT id_user, `name`, lastname, username,user_type,access FROM users where CONCAT(`name`, ' ', lastname) like :na";
+                $search = "SELECT id, `name`, lastname, username,user_type_id,access FROM users where CONCAT(`name`, ' ', lastname) like :na";
                 $pri = $pdo->prepare($search);
                 $pri->execute(array(
                     ':na' => $name . "%"
                 ));
                 if ($pri->rowCount() == 0) {
-                    $search = "SELECT id_user, `name`, lastname, username,user_type,access  FROM users where lastname like :na";
+                    $search = "SELECT id, `name`, lastname, username,user_type_id,access  FROM users where lastname like :na";
                     $pri = $pdo->prepare($search);
                     $pri->execute(array(
                         ':na' => $name . "%"
                     ));
                 }
             } else {
-                $search = "SELECT id_user, `name`, lastname, username,user_type,access FROM users where username like :username";
+                $search = "SELECT id, `name`, lastname, username,user_type_id,access FROM users where username like :username";
                 $pri = $pdo->prepare($search);
                 $pri->execute(array(
                     ':username' => $username . "%"
                 ));
             }
         } else {
-            $search = "SELECT SELECT id_user, `name`, lastname, username,user_type,access FROM users";
+            $search = "SELECT SELECT id, `name`, lastname, username,user_type_id,access FROM users";
             $pri = $pdo->prepare($search);
             $pri->execute(array(
                 ':na' => $name,
@@ -86,7 +86,7 @@ class DAOuser
             require "User.php";
             $ac = $log->fetchAll(PDO::FETCH_OBJ);
             foreach ($ac as $aco) {
-                $_SESSION['acount'] = new User($aco->id_user, $aco->name, $aco->lastname, $aco->username, $aco->password, $aco->user_type, $aco->access);
+                $_SESSION['acount'] = new User($aco->id, $aco->name, $aco->lastname, $aco->username, $aco->password, $aco->user_type_id, $aco->access);
                 $_SESSION['adm'] = $aco->user_type;
             }
         }
