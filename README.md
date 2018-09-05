@@ -10,10 +10,9 @@ Application for registration, login and authentication of users
 3. Import database table from file database/mydb.sql
 4. Insert config data to config/database.php
 
-### Basic usage
-1. Browser
-2. PHP 7.0
-3. MSQL
+### Requirements:
+1. PHP 7.0
+2. MSQL
 
 Author
 Marko Djurovic
