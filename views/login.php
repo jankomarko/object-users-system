@@ -1,10 +1,11 @@
 <?php
+
 ?>
 <form action="index.php?opcija=login" method="post">
     <div align="center" class="form-group row">
         <label for="inputUsername" class="col-sm-2 col-form-label">Username:</label>
         <div class="col-sm-2">
-            <input type="text" class="form-control" id="inputUsername" name="username">
+            <input type="text" class="form-control" id="inputUsername"  name="username" value="<?php if(isset($_POST['username'])) echo $_POST['username'] ?>">
         </div>
     </div>
     <div align="center" class="form-group row">

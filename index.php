@@ -3,10 +3,13 @@ require "views/errorpage.php";
 require "views/layout/header.php";
 require "views/layout/foother.php";
 require "views/meni.php";
+//require "views/login.php";
 require "models/connector.php";
 require "config/database.php";
 require "models/DAOuser.php";
 require "models/User.php";
+
+
 
 $hed= new header();
 $fut= new foother();

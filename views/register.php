@@ -1,9 +1,15 @@
+<?php
+if(isset($_POST['submit'])){
+    $reg= new register();
+    $reg->registeruser($_POST['name'],$_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['repassword']);
+}
+?>
 
 <form action="index.php?opcija=register" method="post">
     <div align="center" class="form-group row">
         <label  for="inputUsername" class="col-sm-2 col-form-label">Username:</label>
         <div   class="col-sm-2">
-            <input type="text" class="form-control" id="inputUsername" name="username">
+            <input type="text" class="form-control" id="inputUsername" name="username" value="<?php if(isset($_POST['username'])) echo $_POST['username'] ?>">
         </div>
     </div>
     <div align="center" class="form-group row">
@@ -21,13 +27,13 @@
     <div align="center" class="form-group row">
         <label  for="inputUsername" class="col-sm-2 col-form-label">Name:</label>
         <div   class="col-sm-2">
-            <input type="text" class="form-control" id="inputUsername" name="name">
+            <input type="text" class="form-control" id="inputUsername" name="name" value="<?php if(isset($_POST['name'])) echo $_POST['name'] ?>">
         </div>
     </div>
     <div align="center" class="form-group row">
         <label  for="inputUsername" class="col-sm-2 col-form-label">lastname:</label>
         <div   class="col-sm-2">
-            <input type="text" class="form-control" id="inputUsername" name="lastname">
+            <input type="text" class="form-control" id="inputUsername" name="lastname" value="<?php if(isset($_POST['lastname'])) echo $_POST['lastname'] ?>">
         </div>
     </div>
     <div align="center" class="form-group row">
@@ -36,14 +42,6 @@
         </div>
     </div>
 </form>
-
-<?php
-if(isset($_POST['submit'])){
-    $reg= new register();
-    $reg->registeruser($_POST['name'],$_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['repassword']);
-}
-?>
-
   <br>  <h6> Ako imate nalog <a href="index.php?opcija=login"> prijavite se</a><br>
 
     <hr>

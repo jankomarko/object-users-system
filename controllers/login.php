@@ -2,9 +2,11 @@
 
 require "views/login.php";
 
+
+
 class login
 {
-    function loginuser($username, $password)
+    public function loginuser($username, $password)
 
     {
         $_SESSION['error'] = "";
@@ -20,6 +22,7 @@ class login
             if ($_SESSION['acount'] !== 0) {
                 if ("Unlock" == $_SESSION['acount']->getAccess()) {
                     $_SESSION['id'] = $_SESSION['acount']->getId();
+
                     header("Location:index.php");
                 } else $_SESSION['error'] .= "Pristup odbijen";
             } else $_SESSION['error'] .= "Pogresni podaci";
