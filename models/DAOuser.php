@@ -83,11 +83,12 @@ class DAOuser
             ':password' => md5($password)
         ));
         if ($log->rowCount() == 1) {
-            require "User.php";
+
+          //  require "User.php";
             $ac = $log->fetchAll(PDO::FETCH_OBJ);
             foreach ($ac as $aco) {
                 $_SESSION['acount'] = new User($aco->id, $aco->name, $aco->lastname, $aco->username, $aco->password, $aco->user_type_id, $aco->access);
-                $_SESSION['adm'] = $aco->user_type;
+                $_SESSION['adm'] = $aco->user_type_id;
             }
         }
         return $_SESSION['acount'];
