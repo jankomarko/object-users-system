@@ -15,8 +15,11 @@ $hed= new header();
 $fut= new foother();
 $hed->headerline();
 $meni = new meni();
-$con = new connector();
-$con->conection();
+
+
+connector::getInstance()->conection();
+//$con = new connector();
+//$con->conection();
 
 session_start();
 
