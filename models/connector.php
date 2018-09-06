@@ -2,7 +2,7 @@
 
 class connector
 {
-    private static $instances = [];
+    private static $instance=null;
     protected function __construct(){
     }
     protected function __clone(){
@@ -13,14 +13,12 @@ class connector
     }
 
 
-    public static function getInstance(): connector
+    public static function getInstance()
     {
-        $cls = get_called_class();
-        if (! isset(self::$instances[$cls])) {
-            self::$instances[$cls] = new static;
+        if (!isset(static::$instance)) {
+            static::$instance = new static;
         }
-
-        return self::$instances[$cls];
+        return static::$instance;
     }
 
 

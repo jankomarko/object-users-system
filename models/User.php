@@ -108,6 +108,4 @@ class User extends Model
 
         return "name: " . $this->name . " " . $this->lastname . ", username: " . $this->usersname . ", usertype: " . $this->usersType . ", access: " . $this->access;
     }
-
-
 }
