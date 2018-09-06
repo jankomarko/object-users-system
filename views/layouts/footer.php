@@ -1,7 +1,7 @@
 <?php
 
 
-class  foother
+class  footer
 {
     function footherline()
     {

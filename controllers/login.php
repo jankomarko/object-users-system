@@ -3,33 +3,32 @@
 require "views/login.php";
 
 
-
 class login
 {
     public function loginuser($username, $password)
-
     {
-        $_SESSION['error'] = "";
         if ($username == "") {
-            $_SESSION['error'] .= "Morate popuniti polje username<br>";
+            array_push($_SESSION['errors'], "-Morate popuniti polje username<br>");
         }
         if ($password == "") {
-            $_SESSION['error'] .= "Morate popuniti polje pasword<br>";
+            array_push($_SESSION['errors'], "-Morate popuniti polje password<br>");
         }
-        if ($_SESSION['error'] == "") {
-            $user= new  User("","","","","","","");
+        if (empty($_SESSION['errors'])) {
+            $user = new  User("", "", "", "", "", "", "");
             $user->login($username, $password);
             if ($_SESSION['acount'] !== 0) {
                 if ("Unlock" == $_SESSION['acount']->getAccess()) {
                     $_SESSION['id'] = $_SESSION['acount']->getId();
-
                     header("Location:index.php");
-                } else $_SESSION['error'] .= "Pristup odbijen";
-            } else $_SESSION['error'] .= "Pogresni podaci";
+                } else{
+                    array_push($_SESSION['errors'],"-Pristup odbijen<br>");
+                }
+            } else {
+                array_push($_SESSION['errors'],"-Pogresni podaci<br>");
+            }
         }
-        $err= new errorpage();
+        $err = new errorpage();
         $err->errormessage();
-
 
 
     }

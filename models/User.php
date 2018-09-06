@@ -28,10 +28,6 @@ class User extends Model
         $this->access = $access;
 
     }
-    public function delete($id)
-    {
-        // TODO: Implement insert() method.
-    }
 
     public function getId()
     {

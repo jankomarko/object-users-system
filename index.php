@@ -1,18 +1,18 @@
 <?php
 require "views/errorpage.php";
 require "views/layouts/header.php";
-require "views/layouts/foother.php";
+require "views/layouts/footer.php";
 require "views/layouts/meni.php";
 //require "views/login.php";
 require "models/connector.php";
-require "config/database.php";
+require "config/Database.php";
 require "models/Model.php";
 require "models/User.php";
 
 
 
 $hed= new header();
-$fut= new foother();
+$fut= new footer();
 $hed->headerline();
 $meni = new meni();
 

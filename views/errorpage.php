@@ -1,10 +1,12 @@
 <?php
-
+$_SESSION['errors']=array();
 class errorpage
 {
     function errormessage()
     {
-        echo $_SESSION['error'];
-        $_SESSION['error'] = "";
+        foreach ($_SESSION['errors'] as $message){
+            echo $message;
+        }
+        $_SESSION['errors']=array();
     }
 }

@@ -21,15 +21,17 @@ abstract class Model
             ':pas' => $user->getPassword()
         ));
     }
-  abstract  function delete($id);
-  /*  {
+
+    function delete($id)
+    {
         global $pdo;
         $delete = ("DELETE FROM `users` WHERE `id_user`=:id");
         $del = $pdo->prepare($delete);
         $del->execute(array(
             ':id' => $id,
         ));
-    }*/
+    }
+
     function select($name, $username)
     {
         global $pdo;
@@ -82,12 +84,19 @@ abstract class Model
         ));
         if ($log->rowCount() == 1) {
 
-          //  require "User.php";
+            //  require "User.php";
             $ac = $log->fetchAll(PDO::FETCH_OBJ);
             foreach ($ac as $aco) {
-                $_SESSION['acount'] = new User($aco->id, $aco->name, $aco->lastname, $aco->username,"", $aco->user_type, $aco->access);
+                $_SESSION['acount'] = new User($aco->id, $aco->name, $aco->lastname, $aco->username, "", $aco->user_type, $aco->access);
             }
         }
         return $_SESSION['acount'];
+    }
+    function update($id){
+        global $pdo;
+        $update= ("");
+
+
+
     }
 }
