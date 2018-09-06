@@ -6,9 +6,10 @@
  * Time: 10:30 AM
  */
 
-class DAOuser
+abstract class Model
 {
-    function insertUsers($user)
+
+    function insert($user)
     {
         global $pdo;
         $insert = ("INSERT INTO `users`(`name`, `lastname`, `username`, `password`)   VALUES (:nam, :las, :use, :pas)");
@@ -20,19 +21,16 @@ class DAOuser
             ':pas' => $user->getPassword()
         ));
     }
-
-    function deleteUsers($id)
-    {
+  abstract  function delete($id);
+  /*  {
         global $pdo;
         $delete = ("DELETE FROM `users` WHERE `id_user`=:id");
         $del = $pdo->prepare($delete);
         $del->execute(array(
             ':id' => $id,
         ));
-
-    }
-
-    function selectUsers($name, $username)
+    }*/
+    function select($name, $username)
     {
         global $pdo;
         if ($name !== "" || $username !== "") {
@@ -72,7 +70,7 @@ class DAOuser
         return $result = 0;
     }
 
-    function loginUsers($username, $password)
+    function login($username, $password)
     {
         global $pdo;
         $_SESSION['acount'] = 0;

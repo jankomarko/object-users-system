@@ -17,8 +17,8 @@ class login
             $_SESSION['error'] .= "Morate popuniti polje pasword<br>";
         }
         if ($_SESSION['error'] == "") {
-            $dao= new DAOuser();
-            $dao->loginUsers($username, $password);
+            $user= new  User("","","","","","","");
+            $user->login($username, $password);
             if ($_SESSION['acount'] !== 0) {
                 if ("Unlock" == $_SESSION['acount']->getAccess()) {
                     $_SESSION['id'] = $_SESSION['acount']->getId();

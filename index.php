@@ -1,12 +1,12 @@
 <?php
 require "views/errorpage.php";
-require "views/layout/header.php";
-require "views/layout/foother.php";
-require "views/meni.php";
+require "views/layouts/header.php";
+require "views/layouts/foother.php";
+require "views/layouts/meni.php";
 //require "views/login.php";
 require "models/connector.php";
 require "config/database.php";
-require "models/DAOuser.php";
+require "models/Model.php";
 require "models/User.php";
 
 

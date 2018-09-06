@@ -6,7 +6,7 @@
  * Time: 4:21 PM
  */
 
-class User
+class User extends Model
 {
     private $id;
     private $name;
@@ -27,6 +27,10 @@ class User
         $this->usersType = $usersType;
         $this->access = $access;
 
+    }
+    public function delete($id)
+    {
+        // TODO: Implement insert() method.
     }
 
     public function getId()
