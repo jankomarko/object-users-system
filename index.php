@@ -64,7 +64,9 @@ if (isset($_SESSION['id'])) {
 
 
 $fut->footherline();
-
+if(!empty($_SESSION['acount'])){
+    print ("<br>".$_SESSION['acount']->getname().", ".$_SESSION['acount']->getUsersType());
+}else echo "<br> no login";
 
 
 

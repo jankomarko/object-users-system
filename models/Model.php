@@ -74,7 +74,7 @@ abstract class Model
     {
         global $pdo;
         $_SESSION['acount'] = 0;
-        $qlogin = ("SELECT * FROM `users` WHERE username= :username AND password=:password");
+        $qlogin = ("SELECT users.id, users.name,users.lastname , users.username,users.password, users.access, user_types.user_type FROM `users` INNER JOIN `user_types` ON users.user_type_id=user_types.id WHERE users.username=:username AND users.password=:password");
         $log = $pdo->prepare($qlogin);
         $log->execute(array(
             ':username' => $username,
@@ -85,8 +85,7 @@ abstract class Model
           //  require "User.php";
             $ac = $log->fetchAll(PDO::FETCH_OBJ);
             foreach ($ac as $aco) {
-                $_SESSION['acount'] = new User($aco->id, $aco->name, $aco->lastname, $aco->username, $aco->password, $aco->user_type_id, $aco->access);
-                $_SESSION['adm'] = $aco->user_type_id;
+                $_SESSION['acount'] = new User($aco->id, $aco->name, $aco->lastname, $aco->username,"", $aco->user_type, $aco->access);
             }
         }
         return $_SESSION['acount'];
