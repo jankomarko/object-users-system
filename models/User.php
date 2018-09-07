@@ -5,7 +5,7 @@
  * Date: 8/30/2018
  * Time: 4:21 PM
  */
-
+namespace models;
 class User extends Model
 {
     private $id;
@@ -27,6 +27,9 @@ class User extends Model
         $this->usersType = $usersType;
         $this->access = $access;
 
+    }
+    public  function __construct()
+    {
     }
 
     public function getId()

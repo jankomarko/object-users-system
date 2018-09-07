@@ -1,9 +1,9 @@
 <?php
 
-
+namespace views\layouts;
 class  footer
 {
-    function footherline()
+    function footerline()
     {
         ?>
 
@@ -20,6 +20,9 @@ class  footer
         </html>
 
         <?php
+        if(!empty($_SESSION['acount'])){
+            print ("<br>".$_SESSION['acount']->getname().", ".$_SESSION['acount']->getUsersType());
+        }else echo "<br> no login";
     }
 
 }

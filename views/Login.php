@@ -1,5 +1,8 @@
 <?php
-
+if (isset($_POST['submit'])) {
+    $log = new \controllers\login();
+    $log->loginuser($_POST['username'], $_POST['password']);
+}
 ?>
 <form action="index.php?opcija=login" method="post">
     <div align="center" class="form-group row">
@@ -23,11 +26,5 @@
         </div>
     </div>
 </form>
-<?php
-if (isset($_POST['submit'])) {
-    $log = new login();
-    $log->loginuser($_POST['username'], $_POST['password']);
-}
-?>
 <h6><br> Ako nemate nalog <a href="index.php?opcija=register"> registrujte se</a></h6>
 <hr>

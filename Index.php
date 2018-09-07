@@ -1,26 +1,22 @@
 <?php
-require "views/errorpage.php";
-require "views/layouts/header.php";
-require "views/layouts/footer.php";
-require "views/layouts/meni.php";
-//require "views/login.php";
-require "models/connector.php";
+require "views/Errorpage.php";
+require "views/layouts/Header.php";
+require "views/layouts/Footer.php";
+require "views/layouts/Navbar.php";
+require "models/Connector.php";
 require "config/Database.php";
 require "models/Model.php";
 require "models/User.php";
 
 
 
-$hed= new header();
-$fut= new footer();
+$hed= new views\layouts\header();
+$fut= new views\layouts\footer();
+$meni = new views\layouts\navbar();
 $hed->headerline();
-$meni = new meni();
 
 
-connector::getInstance()->conection();
-//$con = new connector();
-//$con->conection();
-
+models\connector::getInstance()->conection();
 session_start();
 
 if (isset($_SESSION['id'])) {
@@ -35,7 +31,7 @@ if (isset($_SESSION['id'])) {
         if (file_exists($fajl)) {
             include_once($fajl);
         } else {
-            echo "trazena stranica ne postoji vratite se <a href='index.php'>POCETNU STRANICU</a>";
+            echo "trazena stranica ne postoji vratite se <a href='Index.php'>POCETNU STRANICU</a>";
         }
     } else {
         echo "POCETNA STRANICA";
@@ -53,20 +49,18 @@ if (isset($_SESSION['id'])) {
         if (file_exists($fajl)) {
             include_once($fajl);
         } else {
-            echo "trazena stranica ne postoji vratite se <a href='index.php'>POCETNU STRANICU</a>";
+            echo "trazena stranica ne postoji vratite se <a href='Index.php'>POCETNU STRANICU</a>";
         }
     } else {
         echo "POCETNA STRANICA";
-        include_once('views/login.php');
-        include_once('views/register.php');
+        include_once('views/Login.php');
+        include_once('views/Register.php');
     }
 }
 
 
-$fut->footherline();
-if(!empty($_SESSION['acount'])){
-    print ("<br>".$_SESSION['acount']->getname().", ".$_SESSION['acount']->getUsersType());
-}else echo "<br> no login";
+$fut->footerline();
+
 
 
 

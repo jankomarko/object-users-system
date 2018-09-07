@@ -1,6 +1,6 @@
 <?php
 session_destroy();
-header("Location:index.php");
+header("Location:Index.php");
 
 class logout
 {

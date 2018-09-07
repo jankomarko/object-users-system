@@ -1,4 +1,5 @@
 <?php
+namespace views;
 $_SESSION['errors']=array();
 class errorpage
 {

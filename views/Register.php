@@ -1,6 +1,6 @@
 <?php
 if(isset($_POST['submit'])){
-    $reg= new register();
+    $reg= new controllers\register();
     $reg->registeruser($_POST['name'],$_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['repassword']);
 }
 ?>

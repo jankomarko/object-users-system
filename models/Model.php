@@ -5,7 +5,7 @@
  * Date: 9/3/2018
  * Time: 10:30 AM
  */
-
+namespace models;
 abstract class Model
 {
 
@@ -66,7 +66,7 @@ abstract class Model
         }
         if ($pri->rowCount() > 0) {
 
-            $result = $pri->fetchAll(PDO::FETCH_OBJ);
+            $result = $pri->fetchAll(\PDO::FETCH_OBJ);
             return $result;
         }
         return $result = 0;
@@ -84,18 +84,34 @@ abstract class Model
         ));
         if ($log->rowCount() == 1) {
 
-            //  require "User.php";
-            $ac = $log->fetchAll(PDO::FETCH_OBJ);
+            $ac = $log->fetchAll(\PDO::FETCH_OBJ);
             foreach ($ac as $aco) {
-                $_SESSION['acount'] = new User($aco->id, $aco->name, $aco->lastname, $aco->username, "", $aco->user_type, $aco->access);
+                $_SESSION['acount'] = new User();
+                $_SESSION['acount']->setId($aco->id);
+                $_SESSION['acount']->setName($aco->name);
+                $_SESSION['acount']->setLastname($aco->lastname);
+                $_SESSION['acount']->setUsersname($aco->username);
+                $_SESSION['acount']->setUsersType($aco->user_type);
+                $_SESSION['acount']->setAccess($aco->access);
             }
         }
         return $_SESSION['acount'];
     }
-    function update($id){
-        global $pdo;
-        $update= ("");
 
+    function update($user)
+    {
+        global $pdo;
+        $update = ("UPDATE `users` SET `name`=`:name`,`lastname`=:lastname,`username`=:username,`password`=:pasword,`access`=:access,`user_type_id`=:usertype WHERE id=:id");
+        $up = $pdo->prepare($update);
+        $up->excute(array(
+            ':name' => $user->getName(),
+            ':lastname' => $user->getlastname(),
+            ':usename' => $user->getusername(),
+            ':password' => $user->getpassword(),
+            ':access' => $user->getaccess(),
+            ':usertvpe' => $user->getUserType()
+
+        ));
 
 
     }

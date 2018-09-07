@@ -1,16 +1,14 @@
 <?php
-
-require "views/register.php";
+namespace controllers;
+require "views/Register.php";
 
 class register
 {
     function registeruser($name, $lastname, $username, $password, $repassword)
     {
-        $_SESSION['error'] = "";
-
         if (!empty($username)) {
-            $user1 = new User("", "", "", "", "", "", "");
-            $d = $user1->select("", $username);
+            $user = new \models\User();
+            $d = $user->select("", $username);
             if ($d !== 0) {
                 array_push($_SESSION['errors'], "-Username postoji, unesite drugi<br>");
             }
@@ -32,14 +30,18 @@ class register
             array_push($_SESSION['errors'], "-Morate popuniti polje Lastname<br>");
         }
         if (empty($_SESSION['errors'])) {
-            $user = new User("", $name, $lastname, $username, md5($password), "", "");
-            $user1->insert($user);
-            $_POST['name'] = null;
-            echo "Uspesno ste se registrovali kao: username: " . $_POST['username'] . "!<br>";
+            $user->setName($name);
+            $user->setLastname($lastname);
+            $user->setUsersname($username);
+            $user->setPassword(md5($password));
+            $user->insert($user);
             $_POST['username'] = null;
             $_POST['lastname'] = null;
+            $_POST['name'] = null;
+            echo "Uspesno ste se registrovali kao: username: " . $_POST['username'] . "!<br>";
+
         } else {
-            $err = new errorpage();
+            $err = new \views\errorpage();
             $err->errormessage();
         }
     }

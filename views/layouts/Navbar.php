@@ -1,6 +1,6 @@
 <?php
-
-class meni
+namespace views\layouts;
+class navbar
 {
     function menilogin()
     {
