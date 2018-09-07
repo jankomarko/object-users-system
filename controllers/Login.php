@@ -14,7 +14,7 @@ class login
             array_push($_SESSION['errors'], "-Morate popuniti polje password<br>");
         }
         if (empty($_SESSION['errors'])) {
-            $user = new  \User();
+            $user = new  \models\User();
             $user->login($username, $password);
             if ($_SESSION['acount'] !== 0) {
                 if ("Unlock" == $_SESSION['acount']->getAccess()) {
