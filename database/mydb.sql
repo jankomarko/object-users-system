@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1:3306
--- Generation Time: Sep 05, 2018 at 05:54 PM
+-- Generation Time: Sep 10, 2018 at 09:40 AM
 -- Server version: 5.7.21
 -- PHP Version: 7.2.4
 
@@ -39,7 +39,22 @@ CREATE TABLE IF NOT EXISTS `users` (
   `user_type_id` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`),
   KEY `user_type` (`user_type_id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `user_tokens`
+--
+
+DROP TABLE IF EXISTS `user_tokens`;
+CREATE TABLE IF NOT EXISTS `user_tokens` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `token` varchar(255) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  PRIMARY KEY (`id`),
+  KEY `id_user` (`id_user`)
+) ENGINE=MyISAM AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
 
 -- --------------------------------------------------------
 
