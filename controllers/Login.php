@@ -15,11 +15,12 @@ class login
         }
         if (empty($_SESSION['errors'])) {
             $user = new  \models\User();
-            $user->login($username, $password);
-            if ($_SESSION['acount'] !== 0) {
-                if ("Unlock" == $_SESSION['acount']->getAccess()) {
-                    $_SESSION['id'] = $_SESSION['acount']->getId();
-                    header("Location:Index.php");
+            $user=$user->login($username, $password);
+            if ($user !== 0) {
+                if ("Unlock" == $user->getAccess()) {
+                    $user->insertSessionKey($user->getId());
+                 //   $_SESSION['id'] = $user->getId();
+                    header("Location:index.php?opcija=Home");
                 } else {
                     array_push($_SESSION['errors'], "-Pristup odbijen<br>");
                     print $_SESSION['acount'];

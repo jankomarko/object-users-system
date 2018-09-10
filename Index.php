@@ -8,7 +8,7 @@ require "config/Database.php";
 require "models/Model.php";
 require "models/User.php";
 
-
+//$_SESSION['errors']=array();
 
 $hed= new views\layouts\header();
 $fut= new views\layouts\footer();
@@ -19,7 +19,8 @@ $hed->headerline();
 models\connector::getInstance()->conection();
 session_start();
 
-if (isset($_SESSION['id'])) {
+if (isset($_SESSION['key'])) {
+    print $_SESSION['key'];
     $meni->menilogin();
     if (isset($_GET['opcija'])) {
         $fajl = $_GET['opcija'] . ".php";
