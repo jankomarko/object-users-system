@@ -6,7 +6,7 @@
  * Time: 10:30 AM
  */
 
-namespace models;
+namespace Models;
 abstract class Model
 {
     function insert($user)
@@ -37,7 +37,7 @@ abstract class Model
         global $pdo;
         if ($name !== "" || $username !== "") {
             if ($name !== "") {
-                $search = "SELECT id, `name`, lastname, username,user_type_id,access FROM users where CONCAT(`name`, ' ', lastname) like :na";
+                $search = "SELECT users.id, `name`, lastname, username,user_types.user_type,access FROM users, user_types where CONCAT(`name`, ' ', lastname) like :na and user_types.id=users.user_type_id";
                 $pri = $pdo->prepare($search);
                 $pri->execute(array(
                     ':na' => $name . "%"
@@ -74,7 +74,7 @@ abstract class Model
     function login($username, $password)
     {
         global $pdo;
-        $user = 0;
+        $_SESSION['acount'] = 0;
         $qlogin = ("SELECT users.id, users.name,users.lastname , users.username,users.password, users.access, user_types.user_type FROM `users` INNER JOIN `user_types` ON users.user_type_id=user_types.id WHERE users.username=:username AND users.password=:password");
         $log = $pdo->prepare($qlogin);
         $log->execute(array(
@@ -84,16 +84,16 @@ abstract class Model
         if ($log->rowCount() == 1) {
             $ac = $log->fetchAll(\PDO::FETCH_OBJ);
             foreach ($ac as $aco) {
-                $user = new User();
-                $user->setId($aco->id);
-                $user->setName($aco->name);
-                $user->setLastname($aco->lastname);
-                $user->setUsersname($aco->username);
-                $user->setUsersType($aco->user_type);
-                $user->setAccess($aco->access);
+                $_SESSION['acount'] = new User();
+                $_SESSION['acount']->setId($aco->id);
+                $_SESSION['acount']->setName($aco->name);
+                $_SESSION['acount']->setLastname($aco->lastname);
+                $_SESSION['acount']->setUsersname($aco->username);
+                $_SESSION['acount']->setUsersType($aco->user_type);
+                $_SESSION['acount']->setAccess($aco->access);
             }
         }
-        return $user;
+        return $_SESSION['acount'];
     }
 
     function update($user)
@@ -119,10 +119,7 @@ abstract class Model
         for ($i = 0; $i < 10; $i++) {
             $token .= $characters[rand(0, $charactersLength - 1)];
         }
-
-        $today = date("d/m/Y");
-        settype($today, 'string');
-        $token .= $today;
+        $token .= uniqid();
         global $pdo;
         $insert = ("INSERT INTO `user_tokens`(`token`, `id_user`)   VALUES (:token, :id_user)");
         $d = $pdo->prepare($insert);
@@ -143,4 +140,5 @@ abstract class Model
         ));
     }
 }
+//SELECT users.id, users.name,users.lastname, users.username,user_types.user_type FROM `users`,`user_tokens`, `user_types` WHERE users.id=user_tokens.id_user and user_tokens.token='dttBsWTJZs5b964991ae9aa' and user_types.id=users.user_type_id
 

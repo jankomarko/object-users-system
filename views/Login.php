@@ -1,6 +1,8 @@
 <?php
+
+
 if (isset($_POST['submit'])) {
-    $log = new \controllers\login();
+    $log = new \Controllers\login();
     $log->loginuser($_POST['username'], $_POST['password']);
 }
 ?>

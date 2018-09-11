@@ -5,7 +5,7 @@
  * Date: 8/30/2018
  * Time: 4:21 PM
  */
-namespace models;
+namespace Models;
 class User extends Model
 {
     private $id;

@@ -1,13 +1,15 @@
 <?php
-namespace views;
+namespace Views;
 $_SESSION['errors']=array();
 class errorpage
 {
     function errormessage()
     {
-        foreach ($_SESSION['errors'] as $message){
+        foreach ($_SESSION['errors'] as $message) {
             echo $message;
         }
-        $_SESSION['errors']=array();
+       // echo $_SERVER['REQUEST_URI'];
+        $_SESSION['errors'] = array();
+
     }
 }

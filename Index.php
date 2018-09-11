@@ -4,20 +4,22 @@ require "views/layouts/Header.php";
 require "views/layouts/Footer.php";
 require "views/layouts/Navbar.php";
 require "models/Connector.php";
-require "config/Database.php";
+require "config/database.php";
 require "models/Model.php";
 require "models/User.php";
+require "controllers/Access.php";
 
 //$_SESSION['errors']=array();
 
-$hed= new views\layouts\header();
-$fut= new views\layouts\footer();
-$meni = new views\layouts\navbar();
+$hed= new Views\layouts\header();
+$fut= new Views\layouts\footer();
+$meni = new Views\layouts\navbar();
 $hed->headerline();
 
 
-models\connector::getInstance()->conection();
+Models\connector::getInstance()->conection();
 session_start();
+
 
 if (isset($_SESSION['key'])) {
     print $_SESSION['key'];

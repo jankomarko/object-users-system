@@ -1,5 +1,5 @@
 <?php
-namespace models;
+namespace Models;
 class connector
 {
     private static $instance=null;
@@ -15,14 +15,11 @@ class connector
 
     public static function getInstance()
     {
-        if (!isset(static::$instance)) {
+        if (static::$instance==null) {
             static::$instance = new static;
+            return static::$instance;
         }
-        return static::$instance;
     }
-
-
-
 
     function conection(){
         global $pdo;

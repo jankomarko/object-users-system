@@ -1,6 +1,6 @@
 <?php
 
-namespace views\layouts;
+namespace Views\layouts;
 class header
 {
 function headerline(){

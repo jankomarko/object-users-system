@@ -1,7 +1,7 @@
 <?php
 session_destroy();
 
-$user= new \models\User();
+$user= new \Models\User();
 $user->deleteSessionKey($_SESSION['key']);
 
 

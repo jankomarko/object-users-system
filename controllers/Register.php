@@ -1,5 +1,5 @@
 <?php
-namespace controllers;
+namespace Controllers;
 require "views/Register.php";
 
 class register
@@ -7,7 +7,7 @@ class register
     function registeruser($name, $lastname, $username, $password, $repassword)
     {
         if (!empty($username)) {
-            $user = new \models\User();
+            $user = new \Models\User();
             $d = $user->select("", $username);
             if ($d !== 0) {
                 array_push($_SESSION['errors'], "-Username postoji, unesite drugi<br>");
@@ -41,7 +41,7 @@ class register
             echo "Uspesno ste se registrovali kao: username: " . $_POST['username'] . "!<br>";
 
         } else {
-            $err = new \views\errorpage();
+            $err = new \Views\errorpage();
             $err->errormessage();
         }
     }

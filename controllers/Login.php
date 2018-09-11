@@ -1,7 +1,9 @@
 <?php
 
-namespace controllers;
-require "views/Login.php";
+namespace Controllers;
+if(isset($_SESSION['key'])){
+    header("Location:index.php?opcija=Home");
+} else require "views/Login.php";
 
 class login
 {
@@ -14,12 +16,11 @@ class login
             array_push($_SESSION['errors'], "-Morate popuniti polje password<br>");
         }
         if (empty($_SESSION['errors'])) {
-            $user = new  \models\User();
-            $user=$user->login($username, $password);
+            $user = new  \Models\User();
+            $user = $user->login($username, $password);
             if ($user !== 0) {
                 if ("Unlock" == $user->getAccess()) {
                     $user->insertSessionKey($user->getId());
-                 //   $_SESSION['id'] = $user->getId();
                     header("Location:index.php?opcija=Home");
                 } else {
                     array_push($_SESSION['errors'], "-Pristup odbijen<br>");
@@ -29,7 +30,7 @@ class login
                 array_push($_SESSION['errors'], "-Pogresni podaci<br>");
             }
         }
-        $err = new \views\errorpage();
+        $err = new \Views\errorpage();
         $err->errormessage();
 
 
