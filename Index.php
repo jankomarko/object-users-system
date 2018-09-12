@@ -17,14 +17,9 @@ require "app/Models/SessionKey.php";
 require "app/Models/UserType.php";
 require "app/Controllers/Access.php";
 require "app/Controllers/AdminPage.php";
-//require "app/Controllers/Login.php";
 
-//$_SESSION['errors']=array();
 
-$hed = new Views\layouts\header();
-$fut = new Views\layouts\footer();
-$meni = new Views\layouts\navbar();
-$hed->headerline();
+headerline();
 
 
 Models\connector::getInstance();
@@ -35,7 +30,7 @@ if (isset($_SESSION['key'])) {
     $access = new App\Controllers\Access();
     if ($access->accessUser($_SERVER['REQUEST_URI'], $_SESSION['acount']->getUsersType())) {
         print $_SESSION['key'];
-        $meni->menilogin();
+        menilogin();
 
         if (isset($_GET['opcija'])) {
             $fajl = $_GET['opcija'] . ".php";
@@ -52,9 +47,11 @@ if (isset($_SESSION['key'])) {
         } else {
             echo "POCETNA STRANICA";
         }
-    }else echo  $_SERVER['REQUEST_URI'];
+    } else {
+        echo $_SERVER['REQUEST_URI'];
+    }
 } else {
-    $meni->menilogout();
+    menilogout();
     require "views/Errorpage.php";
     if (isset($_GET['opcija'])) {
         $fajl = $_GET['opcija'] . ".php";
@@ -76,7 +73,7 @@ if (isset($_SESSION['key'])) {
 }
 
 
-$fut->footerline();
+footerline();
 
 
 
