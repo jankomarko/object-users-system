@@ -2,7 +2,7 @@
 namespace Views\layouts;
 class navbar
 {
-    function menilogin()
+    public function menilogin()
     {
         ?>
         <nav class="navbar navbar-expand-lg navbar-light bg-light">
@@ -18,6 +18,9 @@ class navbar
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="index.php?opcija=Search">Pretraga clanova</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="index.php?opcija=AdminPage">Prikaz</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link disabled">
@@ -60,5 +63,6 @@ class navbar
             </div>
         </nav>
         <?php
+        //<form action="index.php?opcija=logout&method=logout" method="post">
     }
 }
