@@ -1,10 +1,14 @@
 <?php
-namespace Controllers;
+
+namespace App\Controllers;
+
+$r = new \App\Controllers\Register();
+$r->registeruser($_POST['name'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['repassword']);
 require "views/Register.php";
 
-class register
+class Register
 {
-    function registeruser($name, $lastname, $username, $password, $repassword)
+    public function registeruser($name, $lastname, $username, $password, $repassword)
     {
         if (!empty($username)) {
             $user = new \Models\User();
@@ -12,7 +16,9 @@ class register
             if ($d !== 0) {
                 array_push($_SESSION['errors'], "-Username postoji, unesite drugi<br>");
             }
-        } else array_push($_SESSION['errors'], "-Morate popuniti polje Username<br>");
+        } else {
+            array_push($_SESSION['errors'], "-Morate popuniti polje Username<br>");
+        }
         if (empty($password)) {
             array_push($_SESSION['errors'], "-Morate popuniti polje Password<br>");
         }
@@ -30,19 +36,21 @@ class register
             array_push($_SESSION['errors'], "-Morate popuniti polje Lastname<br>");
         }
         if (empty($_SESSION['errors'])) {
-            $user->setName($name);
-            $user->setLastname($lastname);
-            $user->setUsersname($username);
-            $user->setPassword(md5($password));
-            $user->insert($user);
+            $reg = array($name, $lastname, $username, md5($password));
+            /*       $user->setName($name);
+                   $user->setLastname($lastname);
+                   $user->setUsersname($username);
+                   $user->setPassword(md5($password));*/
+            $user->insert($reg, $user->getTable(), $user->getFiletable());
             $_POST['username'] = null;
             $_POST['lastname'] = null;
             $_POST['name'] = null;
             echo "Uspesno ste se registrovali kao: username: " . $_POST['username'] . "!<br>";
 
         } else {
-            $err = new \Views\errorpage();
-            $err->errormessage();
+            require "views/Errorpage.php";
+            // $err = new \Views\errorpage();
+            // $err->errormessage();
         }
     }
 

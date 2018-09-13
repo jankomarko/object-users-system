@@ -73,9 +73,10 @@ CREATE TABLE IF NOT EXISTS `user_types` (
 -- Dumping data for table `user_types`
 --
 
-INSERT INTO `user_types` (`id`, `user_type`) VALUES
-(1, 'User'),
-(2, 'Admin');
+INSERT INTO `user_types` (`user_type`) VALUES
+('User'),
+('Manager'),
+('Admin');
 
 --
 -- Constraints for dumped tables

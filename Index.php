@@ -20,8 +20,6 @@ require "app/Controllers/AdminPage.php";
 
 
 headerline();
-
-
 Models\connector::getInstance();
 session_start();
 

@@ -1,0 +1,22 @@
+{
+    "name": "panique/mini",
+    "type": "project",
+    "description": "An extremely simple naked PHP application",
+    "keywords": [],
+    "homepage": "https://github.com/panique/mini",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Panique",
+            "role": "Developer"
+        }
+    ],
+    "require": {
+        "php": ">=7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "App\\": "app/"
+        }
+    }
+}

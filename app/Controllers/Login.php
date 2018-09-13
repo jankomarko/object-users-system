@@ -1,11 +1,16 @@
 <?php
 
-namespace Controllers;
-if(isset($_SESSION['key'])){
-    header("Location:index.php?opcija=Home");
-} else require "views/Login.php";
+namespace App\Controllers;
 
-class login
+if (isset($_SESSION['key'])) {
+    header("Location:index.php?opcija=Home");
+} else {
+    $log = new \App\Controllers\Login();
+    $log->loginuser($_POST['username'], $_POST['password']);
+    require "views/Login.php";
+}
+
+class Login
 {
     public function loginuser($username, $password)
     {
@@ -20,7 +25,8 @@ class login
             $user = $user->login($username, $password);
             if ($user !== 0) {
                 if ("Unlock" == $user->getAccess()) {
-                    $user->insertSessionKey($user->getId());
+                    $sess = new \Models\SessionKey();
+                    $sess->insertSessionKey($user->getId());
                     header("Location:index.php?opcija=Home");
                 } else {
                     array_push($_SESSION['errors'], "-Pristup odbijen<br>");
@@ -30,9 +36,8 @@ class login
                 array_push($_SESSION['errors'], "-Pogresni podaci<br>");
             }
         }
-        $err = new \Views\errorpage();
-        $err->errormessage();
-
-
+        require "views/Errorpage.php";
+        //   $err = new \Views\errorpage();
+        //   $err->errormessage();
     }
 }
