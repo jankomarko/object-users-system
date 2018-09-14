@@ -6,7 +6,7 @@
  * Time: 10:36 AM
  */
 
-namespace Models;
+namespace App\Models;
 
 
 class SessionKey extends  Model

@@ -1,6 +1,6 @@
 <?php
 
-namespace Models;
+namespace App\Models;
 
 /**
  * Class Connector
@@ -8,6 +8,7 @@ namespace Models;
  */
 class Connector
 {
+
     /**
      * @var null
      */
@@ -18,6 +19,7 @@ class Connector
      */
     protected function __construct()
     {
+
     }
 
     /**

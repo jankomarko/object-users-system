@@ -1,8 +1,4 @@
-<?php
 
-function headerline()
-{
-    ?>
 
     <head>
         <!-- Required meta tags -->
@@ -16,6 +12,3 @@ function headerline()
 
         <title>Welcome!</title>
     </head>
-
-    <?php
-}

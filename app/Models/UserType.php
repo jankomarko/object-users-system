@@ -1,8 +1,9 @@
 <?php
 
-namespace Models;
+namespace App\Models;
 
-class UserType
+
+class UserType extends Model
 {
     private $id;
     private $usertype;
@@ -51,7 +52,7 @@ class UserType
         $this->amount = $amount;
     }
 
-    public function select()
+    public function getStatistic()
     {
         global $pdo;
         $qselect = ("SELECT user_types.id, user_types.user_type,(SELECT COUNT(users.id)FROM users WHERE users.user_type_id=user_types.id)\"amount\" FROM `user_types`");

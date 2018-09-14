@@ -1,11 +1,13 @@
 <?php
 
-//require "vendor/autoload.php";
-
+require "vendor/autoload.php";
+require "config/database.php";
+require "views/layouts/Header.php";
+require "views/layouts/Navbar.php";
 //$login=new \App\Controllers\Login();
 //var_dump($login->loginuser("janko","2222"));
 
-
+/*
 require "views/layouts/Header.php";
 require "views/layouts/Footer.php";
 require "views/layouts/Navbar.php";
@@ -16,17 +18,21 @@ require "app/Models/User.php";
 require "app/Models/SessionKey.php";
 require "app/Models/UserType.php";
 require "app/Controllers/Access.php";
-require "app/Controllers/AdminPage.php";
+require "app/Controllers/adminPage.php";
 
+*/
 
-headerline();
-Models\connector::getInstance();
+App\Models\Connector::getInstance();
 session_start();
 
 
 if (isset($_SESSION['key'])) {
     $access = new App\Controllers\Access();
-    if ($access->accessUser($_SERVER['REQUEST_URI'], $_SESSION['acount']->getUsersType())) {
+
+    /** @var \App\Models\User $account */
+    $account = $_SESSION['acount'];
+
+    if ($access->accessUser($_SERVER['REQUEST_URI'], $account->getUsersType())) {
         print $_SESSION['key'];
         menilogin();
 
@@ -47,10 +53,11 @@ if (isset($_SESSION['key'])) {
         }
     } else {
         echo $_SERVER['REQUEST_URI'];
+        header("Location:Index.php");
     }
 } else {
     menilogout();
-    require "views/Errorpage.php";
+    require "views/errorpage.php";
     if (isset($_GET['opcija'])) {
         $fajl = $_GET['opcija'] . ".php";
         if (empty($_POST)) {
@@ -65,14 +72,14 @@ if (isset($_SESSION['key'])) {
         }
     } else {
         echo "POCETNA STRANICA";
-        include_once('views/Login.php');
-        include_once('views/Register.php');
+        include_once('views/login.php');
+        include_once('views/register.php');
     }
 }
 
 
-footerline();
 
+require "views/layouts/Footer.php";
 
 
 

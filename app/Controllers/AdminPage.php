@@ -6,8 +6,8 @@ class AdminPage
 {
     public function rrrr()
     {
-        $d = new \Models\UserType();
-       $d= $d->select();
+        $d = new \App\Models\UserType();
+       $d= $d->getStatistic();
 
 
      //  print_r($d->select());

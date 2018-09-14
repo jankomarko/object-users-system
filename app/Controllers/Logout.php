@@ -10,7 +10,7 @@ class Logout
     public function destroysession()
     {
         session_destroy();
-        $sess = new \Models\SessionKey();
+        $sess = new \App\Models\SessionKey();
         $sess->deleteSessionKey($_SESSION['key']);
         header("Location:Index.php");
     }

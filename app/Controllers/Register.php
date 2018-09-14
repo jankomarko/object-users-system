@@ -1,14 +1,37 @@
 <?php
 
 namespace App\Controllers;
-
+//$this->registeruser($_POST['name'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['repassword']);
 $r = new \App\Controllers\Register();
 $r->registeruser($_POST['name'], $_POST['lastname'], $_POST['username'], $_POST['password'], $_POST['repassword']);
-require "views/Register.php";
+require "views/register.php";
 
 class Register
 {
     public function registeruser($name, $lastname, $username, $password, $repassword)
+    {
+        $user = new \Models\User();
+        $this->validationPost($name, $lastname, $username, $password, $repassword);
+        if (empty($_SESSION['errors'])) {
+            $reg = array($name, $lastname, $username, md5($password));
+            /*       $user->setName($name);
+                   $user->setLastname($lastname);
+                   $user->setUsersname($username);
+                   $user->setPassword(md5($password));*/
+            $user->insert($reg, $user->getTable(), $user->getFiletable());
+            $_POST['username'] = null;
+            $_POST['lastname'] = null;
+            $_POST['name'] = null;
+            echo "Uspesno ste se registrovali kao: username: " . $_POST['username'] . "!<br>";
+
+        } else {
+            require "views/errorpage.php";
+            // $err = new \Views\errorpage();
+            // $err->errormessage();
+        }
+    }
+
+    public function validationPost($name, $lastname, $username, $password, $repassword)
     {
         if (!empty($username)) {
             $user = new \Models\User();
@@ -34,23 +57,6 @@ class Register
         }
         if (empty($lastname)) {
             array_push($_SESSION['errors'], "-Morate popuniti polje Lastname<br>");
-        }
-        if (empty($_SESSION['errors'])) {
-            $reg = array($name, $lastname, $username, md5($password));
-            /*       $user->setName($name);
-                   $user->setLastname($lastname);
-                   $user->setUsersname($username);
-                   $user->setPassword(md5($password));*/
-            $user->insert($reg, $user->getTable(), $user->getFiletable());
-            $_POST['username'] = null;
-            $_POST['lastname'] = null;
-            $_POST['name'] = null;
-            echo "Uspesno ste se registrovali kao: username: " . $_POST['username'] . "!<br>";
-
-        } else {
-            require "views/Errorpage.php";
-            // $err = new \Views\errorpage();
-            // $err->errormessage();
         }
     }
 

@@ -6,7 +6,8 @@
  * Time: 4:21 PM
  */
 
-namespace Models;
+namespace App\Models;
+
 
 class User extends Model
 {
@@ -19,6 +20,7 @@ class User extends Model
     private $access;
     protected $table = "users";
     protected $filetable = array('name', 'lastname','username','password');
+
 
     public function User($id, $name, $lastname, $usersname, $password, $usersType, $access)
     {
